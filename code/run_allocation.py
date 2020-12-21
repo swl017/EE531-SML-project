@@ -24,9 +24,9 @@ def main():
     debug = False
     np.set_printoptions(formatter={'float': lambda x: "{0:0.3f}".format(x)})
     # Players
-    n = 10
+    n = 5
     # Goods
-    m = 5*n
+    m = 3*n
     # Types of goods. Select (m or n)
     items = n
     # Sum of valuations
@@ -122,56 +122,6 @@ def main():
                     nash_wellfare *= players[k].valuation(A_all[k])
                 max_nash = max(max_nash, nash_wellfare)
 
-    max_nash_brute = 1.
-    # '''
-    # Brute force combination
-    # '''
-    # player_list = [x for x in range(n)]
-    # comb_list = []
-    # for i in range(item):
-    #     comb_list.append([])
-    #     # num of player of each item
-    #     for cwr in combinations_with_replacement(player_list, quantities[i]):
-    #         comb_list[i].append(cwr)
-
-    # c_x = 1
-    # for i in range(n):
-    #     c_x *= len(comb_list[i])
-    # comb_index_list = np.zeros((c_x, item))
-
-    # done = False
-    # A_iter = np.zeros_like(A_all)
-    # for i in range(c_x):
-    #     for j in range(items):
-    #         for l in comb_list[j][comb_index_list[i][j]]:
-    #             for m in l:
-    #                 A_iter[m][j] += 1
-    # for i in range(items):
-    #     for j in range(comb_list[i][comb_index_list[i]]):
-    #         A_iter[j][i] += 1
-    # nash_wellfare_brute = 1.
-    # for i in range(n):
-    #     nash_wellfare_brute *= players[i].valuation(A_iter[i])
-    # max_nash_brute = max(max_nash_brute, nash_wellfare_brute)
-
-    # permute_index = []
-    # for x in range(items):
-    #     permute_index.append([])
-    #     for y in range(len(comb_list[x])):
-    #         permute_index[x].append(y)
-    # permute_brute = permutaions(permute_index, items)
-    #   for comb_list_index in permute_brute:
-    #        for i in range(len(comb_list_index)):
-    #             comb_list[i][comb_list_index[i]]
-
-    #         for cwr in combinations_with_replacement(player_list, quantities[i]):
-
-    #             for player_cwr in cwr:
-    #                 A_iter[pl][i] += 1
-
-    #         for j in range(quantities[i]):
-    #             pl = random.randrange(0, n)
-
     '''
     Result summary
     '''
@@ -211,8 +161,8 @@ def main():
 
     print("Check Maximum Nash Wellfare:")
     print(" - Current NW = "+str(nash_wellfare))
-    print(" - MNW        = "+str(max_nash_brute))
-    MNW = (max_nash_brute == nash_wellfare)
+    print(" - MNW        = "+str(max_nash))
+    MNW = (max_nash == nash_wellfare)
 
     if pareto_optimal:
         print("It is Pareto_optimal")
@@ -231,6 +181,8 @@ if __name__ == "__main__":
     num_pareto = 0
     num_mnw = 0
     for i in range(num_iter):
+        print("===")
+        print("===")
         pareto_optimal, MNW = main()
         num_pareto += int(pareto_optimal)
         num_mnw += int(MNW)
