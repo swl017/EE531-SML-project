@@ -6,6 +6,7 @@ class Player(object):
     def __init__(self, id, goods, K, value_array=None):
         self.id = id
         self.goods = goods
+        self.total_num_goods = np.sum(goods)
         self.K = K
         '''
         Assume [0,1] valuation for every goods.
@@ -18,10 +19,10 @@ class Player(object):
             self.value_array = np.zeros_like(goods)
             for i in range(len(goods)):
                 if i == len(goods)-1:
-                    self.value_array[i] = self.K
+                    self.value_array[i] = self.K / goods[i]
                 else:
-                    self.value_array[i] = random.randrange(0, self.K)
-                self.K -= self.value_array[i]
+                    self.value_array[i] = self.K / goods[i] * random.random()
+                self.K -= self.value_array[i] * goods[i]
                 if self.K == 0:
                     break
         # print("K = "+str(self.K))
