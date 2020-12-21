@@ -3,6 +3,9 @@
 Code implementation of 
 [**Group Fairness for the Allocation of Indivisible Goods**, Conitzer, AAAI 2019](https://users.cs.duke.edu/~conitzer/group-fairness-full.pdf)
 
+The code reaches group fair results only by evaluating pair of individuals' local Nash optimality.
+The number of players `n` and items `m` can be adjusted in `code/run_allocation.py`
+
 ## Sample Output
 ```python
 player 0's preference: [ 259.   71.   22.   75.   73.]
